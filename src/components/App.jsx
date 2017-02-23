@@ -5,7 +5,14 @@ class App extends React.Component {
     this.state = {
       current: window.exampleVideoData[0],
       list: window.exampleVideoData,
+      clicked: false
     };
+    //this.props.searchYouTube();
+  }
+  onTitleClicked() {
+    this.setState({
+      clicked: !this.state.clicked
+    });
   }
   render() {
     return (
