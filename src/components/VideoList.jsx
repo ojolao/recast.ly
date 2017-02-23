@@ -1,11 +1,12 @@
-var VideoList = (props) => (
-  <div className="video-list media">
-  {props.videos.map(item => 
-      <VideoListEntry item={item} />
-  )}
-  </div>
-);
-
+var VideoList = (props) => {
+  return (
+    <div className="video-list media">
+      {props.videos.map( video => 
+          <VideoListEntry key={video.toString()} video={video} />
+      )}
+    </div>
+  );
+};
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated
 VideoList.propTypes = {
@@ -16,4 +17,4 @@ VideoList.propTypes = {
 // `var` declarations will only exist globally where explicitly defined.
 window.VideoList = VideoList;
 
-//ReactDOM.render(<VideoList videos={VideoList.propTypes}/>, document.getElementById('app'));
+//ReactDOM.render(<VideoList />, document.getElementById('app'));
