@@ -1,15 +1,19 @@
-var VideoListEntry = (props) => (
-  <div className="video-list-entry">
-    <div className="media-left media-middle">
-      <img className="media-object" src={props.video.snippet.thumbnails.default.url} alt="" />
+const VideoListEntry = (props) => {
+  console.log('props within VideoListEntry', props);
+  console.log('this within VideoListEntry', this);
+  console.log('App within VideoListEntry', App);
+  return (
+    <div className="video-list-entry">
+      <div className="media-left media-middle">
+        <img className="media-object" src={props.video.snippet.thumbnails.default.url} alt="" />
+      </div>
+      <div className="media-body">
+        <div className="video-list-entry-title" onClick={(e) => onTitleClicked(e, props)}>{props.video.snippet.title}</div>
+        <div className="video-list-entry-detail">{props.video.snippet.description}</div>
+      </div>
     </div>
-    <div className="media-body">
-      <div className="video-list-entry-title" onClick={props.onTitleClicked}>{props.video.snippet.title}</div>
-      <div className="video-list-entry-detail">{props.video.snippet.description}</div>
-    </div>
-  </div>
-
-);
+  );
+};
 
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated

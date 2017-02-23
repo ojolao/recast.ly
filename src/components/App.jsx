@@ -1,20 +1,22 @@
 class App extends React.Component { 
   constructor(props) {
-    console.log(props);
     super(props);
+    this.onTitleClicked = this.onTitleClicked.bind(this); 
     this.state = {
-      current: window.exampleVideoData[0],
-      list: window.exampleVideoData,
+      current: {props}, //zero here
+      list: props,
       clicked: false
     };
-    this.props.searchYouTube(); //this.render as a call?
   }
-  onTitleClicked() {
+
+  onTitleClicked(e, props) {
+    e.preventDefault();
     this.setState({
       clicked: !this.state.clicked
     });
-    console.log('i\'ve been clicked!');
+    //we need to create some kind of logic that will transform the clicked video to an index and set it as the current (constructor)
   }
+
   render() {
     return (
       <div>
@@ -23,7 +25,7 @@ class App extends React.Component {
             <VideoPlayer video={this.state.current}/> 
           </div>
           <div className="col-md-5">
-            <VideoList videos={this.state.list}/> 
+            <VideoList videos={this.state.list} click={this.onTitleClicked}/> 
           </div>
       </div>
     );
