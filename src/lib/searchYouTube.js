@@ -10,7 +10,11 @@ var searchYouTube = (options, callback) => {
     //                  &q=soccer
     //                  &key={YOUR_API_KEY}
     //data: ,
-   function(data) { callback(data.items); }
+  
+  function(data) { 
+    console.log(data);
+    callback(data.items);
+  }
   );
 
   //options:
@@ -19,6 +23,7 @@ var searchYouTube = (options, callback) => {
     //key - authorized youtube API key
 
   //restrictions - GET embeddable videos only
+
 };
 
 window.searchYouTube = searchYouTube;

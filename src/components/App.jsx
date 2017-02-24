@@ -2,19 +2,33 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.onTitleClicked = this.onTitleClicked.bind(this); 
+    this.invokeSearchYouTube = this.invokeSearchYouTube.bind(this);
+    this.invokeSearchYouTube(); //used to be window.searchYouTube();
+    
     this.state = {
-      current: {props}, //zero here
-      list: props,
+      current: window.exampleVideoData[0],
+      list: window.exampleVideoData,
       clicked: false
     };
   }
 
-  onTitleClicked(e, props) {
+  onTitleClicked(e, prop) {
     e.preventDefault();
     this.setState({
-      clicked: !this.state.clicked
+      clicked: !this.state.clicked,
+      current: prop
     });
     //we need to create some kind of logic that will transform the clicked video to an index and set it as the current (constructor)
+  }
+
+  invokeSearchYouTube(string) {
+    var options = {
+      query: (string || 'anything'),
+      max: 5,
+      key: window.YOUTUBE_API_KEY 
+    };
+
+    window.searchYouTube(options, function(item) {  } );
   }
 
   render() {
