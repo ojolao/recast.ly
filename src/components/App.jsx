@@ -3,13 +3,30 @@ class App extends React.Component {
     super(props);
     this.onTitleClicked = this.onTitleClicked.bind(this); 
     this.invokeSearchYouTube = this.invokeSearchYouTube.bind(this);
-    this.invokeSearchYouTube(); //used to be window.searchYouTube();
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     
     this.state = {
       current: window.exampleVideoData[0],
-      list: window.exampleVideoData,
-      clicked: false
+      list: [],
+      clicked: false,
+      input: '' 
     };
+  }
+
+  componentDidMount() { 
+    this.invokeSearchYouTube();
+  }
+
+  handleChange(e) {
+    this.setState({
+      input: e.target.value
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.invokeSearchYouTube(this.state.input);
   }
 
   onTitleClicked(e, prop) {
@@ -23,18 +40,23 @@ class App extends React.Component {
 
   invokeSearchYouTube(string) {
     var options = {
-      query: (string || 'anything'),
+      query: (string || 'smoothiethecat'),
       max: 5,
       key: window.YOUTUBE_API_KEY 
     };
 
-    window.searchYouTube(options, function(item) {  } );
+    this.props.searchYouTube(options, (videos) => 
+      this.setState({
+        current: videos[0],
+        list: videos
+      })
+    );
   }
 
   render() {
     return (
       <div>
-        <Nav />
+        <Nav onChange={this.handleChange} onSubmit={this.handleSubmit} value={this.state.input}/>
           <div className="col-md-7">
             <VideoPlayer video={this.state.current}/> 
           </div>

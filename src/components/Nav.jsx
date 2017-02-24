@@ -1,7 +1,7 @@
-var Nav = () => (
+var Nav = (props) => (
   <nav className="navbar">
     <div className="col-md-6 col-md-offset-3">
-      <Search />
+      <Search onChange={props.onChange} onSubmit={props.onSubmit} value={props.value}/>
     </div>
   </nav>
 );
